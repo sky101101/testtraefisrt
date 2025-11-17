@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		57B25F92597739F7CE051FF4 /* Pods_nfcond.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C41308073389A8931A95DF49 /* Pods_nfcond.framework */; };
+		ECF343792EC36FFA00C05E6E /* CoreNFC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECF343782EC36FFA00C05E6E /* CoreNFC.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BB82312BDD6648C502D53AA0 /* Pods-nfcond.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nfcond.release.xcconfig"; path = "Target Support Files/Pods-nfcond/Pods-nfcond.release.xcconfig"; sourceTree = "<group>"; };
 		C41308073389A8931A95DF49 /* Pods_nfcond.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nfcond.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECF343602EC36FF700C05E6E /* nfcond.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nfcond.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECF343782EC36FFA00C05E6E /* CoreNFC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreNFC.framework; sourceTree = SDKROOT; };
 		F22BB9CE13E798097B7958C4 /* Pods-nfcond.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nfcond.debug.xcconfig"; path = "Target Support Files/Pods-nfcond/Pods-nfcond.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -44,6 +46,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57B25F92597739F7CE051FF4 /* Pods_nfcond.framework in Frameworks */,
+				ECF343792EC36FFA00C05E6E /* CoreNFC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,13 +166,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-nfcond/Pods-nfcond-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-nfcond/Pods-nfcond-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -291,6 +290,7 @@
 		};
 		ECF343762EC36FFA00C05E6E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB82312CDD6648C502D53AA0 /* Pods-nfcond.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
