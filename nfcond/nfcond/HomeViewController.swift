@@ -325,28 +325,30 @@ class HomeViewController: UIViewController, NFCNDEFReaderSessionDelegate, NFCTag
             session.invalidate(errorMessage: "未检测到标签")
             return
         }
-    }
-    
-    private func writeNDEFData(to tag: NFCNDEFTag, in session: NFCTagReaderSession) {
-        // 创建NDEF记录
-        guard let payload = testNDEFData.data(using: .utf8) else {
-            session.invalidate(errorMessage: "无法创建数据")
-            return
-        }
         
-        let ndefMessage = NFCNDEFMessage(records: [NFCNDEFPayload.wellKnownTypeTextPayload(string: testNDEFData, locale: Locale.current)!])
-        
-        tag.writeNDEF(ndefMessage) { [weak self] error in
+        // 连接到标签
+        session.connect(to: tag) { [weak self] error in
             guard error == nil else {
-                session.invalidate(errorMessage: "写入失败: \(error!.localizedDescription)")
+                session.invalidate(errorMessage: "连接标签失败: \(error!.localizedDescription)")
                 return
             }
             
-            DispatchQueue.main.async { [weak self] in
-                self?.showAlert(title: "写入成功", message: "已成功将数据写入NFC标签")
+            // 检查标签类型是否支持NDEF
+            if case .iso7816(let iso7816Tag) = tag {
+                print("检测到ISO7816标签: \(iso7816Tag.identifier)")
+                session.invalidate()
+            } else if case .miFare(let miFareTag) = tag {
+                print("检测到MiFare标签: \(miFareTag.identifier)")
+                session.invalidate()
+            } else if case .feliCa(let feliCaTag) = tag {
+                print("检测到FeliCa标签: \(feliCaTag.currentSystemCode)")
+                session.invalidate()
+            } else if case .iso15693(let iso15693Tag) = tag {
+                print("检测到ISO15693标签: \(iso15693Tag.identifier)")
+                session.invalidate()
+            } else {
+                session.invalidate(errorMessage: "不支持的标签类型")
             }
-            
-            session.invalidate()
         }
     }
     
@@ -354,7 +356,7 @@ class HomeViewController: UIViewController, NFCNDEFReaderSessionDelegate, NFCTag
         let nfcError = error as! NFCReaderError
         if nfcError.code != .readerSessionInvalidationErrorUserCanceled {
             DispatchQueue.main.async { [weak self] in
-                self?.showAlert(title: "写入失败", message: "\(error.localizedDescription)")
+                self?.showAlert(title: "操作失败", message: "\(error.localizedDescription)")
             }
         }
         
