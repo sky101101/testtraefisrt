@@ -26,5 +26,7 @@
 		<string>NDEF</string>
 		<string>TAG</string>
 	</array>
+	<key>NFCReaderUsageDescription</key>
+	<string>此应用需要使用NFC功能来读取和写入NFC标签数据</string>
 </dict>
 </plist>
